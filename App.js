@@ -12,6 +12,13 @@ export default function App() {
                 }}
                 title="Activate"
             />
+            <Button
+                onPress={() => {
+                    setIsVisible(false);
+                }}
+                title="Deactivate"
+            />
+            {isVisible?<Text> get printed </Text>:null}
             <Text>{isVisible ? "hello": null}</Text>
         </View>
     );
