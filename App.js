@@ -1,28 +1,19 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Text, View, Button, ScrollView} from 'react-native';
 
 
-export default class App extends Component {
-  state={
-    isVisible:false
-  }
-
-  renderResults=() =>{
-    this.setState({
-      isVisible: !this.state.isVisible
-    })
-  }
-  render() {
+export default function App() {
+    const [isVisible, setIsVisible] = useState(false);
     return (
-        <ScrollView>
-          <View style={{justifyContent:'center',alignItems:'center'}}>
-            {this.state.isVisible?<Text> get printed </Text>:null}
-            <Button onPress={ this.renderResults}
-                    title="Search!"
-                    color="#841584" />
-          </View>
-        </ScrollView>
+        <View>
+            <Button
+                onPress={() => {
+                    setIsVisible(true);
+                }}
+                title="Activate"
+            />
+            <Text>{isVisible ? "hello": null}</Text>
+        </View>
     );
-  }
 }
 
