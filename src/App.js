@@ -85,6 +85,7 @@ export default function App() {
         </View>
     );
 };
+
 const SIZERATIO = 0.4;
 const ImageWidth = 1441;
 const ImageHeight = 1031;
