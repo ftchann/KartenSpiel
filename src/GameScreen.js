@@ -1,10 +1,20 @@
-import React, {useState} from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, Image, Button} from 'react-native';
+import React, {useState, Component} from 'react';
+import { AppState, View, StyleSheet, Text, TouchableOpacity, Image, Button, Vibration} from 'react-native';
+
+import RNShake from 'react-native-shake';
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
+const PATTERN = [ 100, 200];
+
+
 export function GameScreen() {
+
+    RNShake.addEventListener('ShakeEvent', onPress);
+
+
     const [number1, setNumber1] = useState(0);
     const [number2, setNumber2] = useState(0);
     const [numberRerolls, setnumberRerolls] = useState(0);
@@ -43,13 +53,24 @@ export function GameScreen() {
                 }
         }
     }
+
+    function startVibration(){
+        Vibration.vibrate(PATTERN);
+    }
+    function stopVibration(){
+        Vibration.cancel();
+    }
+
+
     function onPress(){
+        startVibration();
         setVisible(false);
-        setNumber1(getRandomInt(6 ) + 1);
+        setNumber1(getRandomInt(6) + 1);
         setNumber2(getRandomInt(6) + 1);
         setnumberRerolls(numberRerolls + 1);
     }
     function pass() {
+        stopVibration();
         setVisible(false);
         setnumberRerolls(0);
     }
@@ -57,7 +78,7 @@ export function GameScreen() {
         <View style={styles.container}>
             <View style={styles.content}>
                 <View style={styles.titleWrapper}>
-                    <Text style={styles.text}>Meier</Text>
+                    <Text style={styles.text}>Meieren</Text>
                 </View>
                 <View style={styles.inputWrapper}>
                     <View style={[styles.cropped]}>
